@@ -1,0 +1,4 @@
+#!/bin/bash
+# docker.debug - Works like docker.run but with BENCH_LOG=1 for logging
+# Must pass filename and run count in that order
+docker run --rm --env BENCH_LOG=1  -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench edhowland/searchbench $1 $2

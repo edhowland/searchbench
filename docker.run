@@ -1,0 +1,3 @@
+#!/bin/bash
+# Must pass filename and run count in that order
+docker run --rm  -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench edhowland/searchbench $1 $2

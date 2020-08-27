@@ -1,0 +1,12 @@
+CREATE TABLE runs (
+num int,
+command varchar,
+pattern varchar,
+real float,
+user float,
+sys float);
+CREATE TABLE averages (
+command varchar,
+real float,
+user float,
+sys float);
