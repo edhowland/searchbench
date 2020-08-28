@@ -1,9 +1,16 @@
 # Searchbench - Docker image for benchmarking search methods
 
-## Abstract
-
 This Docker container will benchmark 8 file/path search tools on a x86-64 Linux
 system for a given filename. It will return its results in a CSV formatted to stdout.
+
+## Dockerfile
+
+[Dockerfile](https://github.com/edhowland/searchbench/blob/master/Dockerfile "Dockerfile used to build this image")
+
+
+## Source on GitHub
+
+The sources for this image can be found over at <https://github.com/edhowland/searchbench>
 
 ## Running the searchbench tool:
 
