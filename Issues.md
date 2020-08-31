@@ -9,7 +9,6 @@
 
 ## Update README.md with Logging command
 
-## Update README.md to warn about not using any mounted network shares
 
 
 ## Make new entrypoint for serial usage vs interleaved
