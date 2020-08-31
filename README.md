@@ -14,12 +14,20 @@ The sources for this image can be found over at <https://github.com/edhowland/se
 
 ## Running the searchbench tool:
 
+There are 2 mountpoints needed for the container to run the benchmark.
+
+Note: **Make sure neither of these mount points are attached to a folder
+containing any mounted network shares!**
+
+- The top level directory wherein you want to search for the passed in file
+- A scratchpad directory where searchbench will create some temporary files
+
 ```bash
-$ docker run --rm -v ${HOME}:${HOME} -v $PWD}:/work edhowland/searchbench main.rs 10
+$ docker run --rm -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 10
 ```
 
-The first mounted volume is the path you want to search in for the filename.
-The second volume (both are required) is a scratch folder. You could use /tmp for this.
+Again note: ** Make sure '-v ${HOME}:${HOME}' does not contain any mounted network shares**.
+
 Finally, we give the filename to search for, here: main.rs,  and the number of benchmark
 passes, in this case 10.
 
@@ -92,6 +100,21 @@ All the following tools are grep-alike in their usage.
 - ack
 - ag (Also known as the Silver Searcher)
 - rg : A replacement for grep or ag written in Rust
+
+## A pure Apples to Apples test
+
+In order to not show any favorability to tools that might use extra threads
+running on a multi-core system, we can restrict the docker run command to just
+a single CPU.
+
+```bash
+$ docker run --rm --cpuset-cpus 1 -v ${HOME}:${HOME} -v $PWD}:/work edhowland/searchbench main.rs 10
+```
+
+In the above case, the flag '--cpuset-cpus 1' is passed to the docker run invocation.
+Then locate and fdfind should be running on similar footing.
+
+In my tests, this did not change the rankings.
 
 
 
