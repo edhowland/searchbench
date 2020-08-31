@@ -1,6 +1,5 @@
 # Issues
 
-## Logging not working
 
 ## Log the exit status of each command pass
 

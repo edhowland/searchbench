@@ -1,5 +1,9 @@
 # Searchbench - Docker image for benchmarking search methods
 
+## Current Docker tag
+
+edhowland/searchbench:0.2
+
 This Docker container will benchmark 8 file/path search tools on a x86-64 Linux
 system for a given filename. It will return its results in a CSV formatted to stdout.
 
@@ -19,8 +23,8 @@ There are 2 mountpoints needed for the container to run the benchmark.
 Note: **Make sure neither of these mount points are attached to a folder
 containing any mounted network shares!**
 
-- The top level directory wherein you want to search for the passed in file
-- A scratchpad directory where searchbench will create some temporary files
+- The top level directory wherein you want to search for the passed in file. Volume is read-only
+- A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'
 
 ```bash
 $ docker run --rm -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 10
@@ -30,6 +34,10 @@ Again note: ** Make sure '-v ${HOME}:${HOME}' does not contain any mounted netwo
 
 Finally, we give the filename to search for, here: main.rs,  and the number of benchmark
 passes, in this case 10.
+
+Note: Any files generated in the scratchpad folder mounted to /work in the container
+might be write-protected. They can be removed with 'rm -f dirs+files.lst bench.log'
+
 
 ## Output format
 

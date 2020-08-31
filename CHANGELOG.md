@@ -8,3 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ### Update README.md to warn about not using any mounted network shares
+
+
+### Logging not working
+
+
+Filename was incorrect in scripts/bench_log.sh
