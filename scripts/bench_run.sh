@@ -15,6 +15,7 @@ run() {
   log running "$cmd" for "$file" for run number "$rnum"
   echo -n "${rnum},${cmd},${file},"
   { time "$cmd" "$file" >/dev/null ;} 2>&1
+  log "$cmd" returned "$?"
 }
 
 # wrap the find command in a function to deal with needed arguments

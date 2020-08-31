@@ -127,3 +127,31 @@ In my tests, this did not change the rankings.
 
 
 
+
+
+## Debugging/Logging
+
+You can activate logging information by passing the 'BENCH_LOG' variable set to 1
+in the docker run command flags:
+
+```bash
+
+```bash
+$ docker run --rm -it --entrypoint bash  -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench
+```
+$ docker run --rm --env BENCH_LOG=1 -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 1
+```
+
+In the above case we are just running a single pass. The log file be written
+to '/tmp/bench.log'. This file might be write-protected. It can be removed
+by 'rm -f /tmp/bench.log' when no longer needed.
+
+### Poking around inside the container to manually test some stuff
+
+You can  override the default entry point of the container with the  '--entrypoint bash'
+flag to the docker run command.
+
+
+
+
+In the above case we do not pass any arguments to the command.

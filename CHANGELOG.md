@@ -14,3 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 Filename was incorrect in scripts/bench_log.sh
+
+### Log the exit status of each command pass
+
+When running in logging mode, the exit status of each command is written to the log file.
+
+
+### Update README.md with Logging command
