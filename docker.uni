@@ -1,0 +1,3 @@
+#!/bin/bash
+# Like docker.run but limits the number of CPUs to 1
+docker run --rm  -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench --cpuset-cpus 1 edhowland/searchbench:$(cat docker.tag) $1 $2

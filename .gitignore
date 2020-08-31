@@ -1,5 +1,6 @@
 bench.log
 benchmark.csv
 scripts.tar
-benchmark.db
+*.db
+*.csv
 dirs+files.lst

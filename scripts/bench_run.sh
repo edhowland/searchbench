@@ -50,7 +50,7 @@ fn.ack() {
   fn.match ack
 }
 fn.ag() {
-  fn.match ag
+  fn.match 'ag --no-affinity'
 }
 fn.rg() {
   fn.match rg
