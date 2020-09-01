@@ -6,8 +6,7 @@ test -z "$filename" && filename=README.md
 run_count="$2"
 test -z "$run_count" && run_count=3
 
-./bench_init.sh
-sleep 10
+./bench_init.sh "$filename" || exit $?
 log Will run benchmark searching for "$filename" "$run_count" times
 #log Starting warmup
 #for i in {1..3}
@@ -24,5 +23,7 @@ do
   ./bench_run.sh "$filename" "$n"
   log Stopping run: "$n" "================"
 done
+# erase any non-zero exit status cruft accumulated above
+exit 0
 
 
