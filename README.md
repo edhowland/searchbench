@@ -88,7 +88,7 @@ run beforehand, say, in a cron job. The searchbench script runs this first.
 - locate
 - mlocate
 - find
-- fd (debian package: fdfind) : A find replacement written in Rust
+- fd <https://github.com/sharkdp/fd>
 
 ### The matchers
 
@@ -107,7 +107,7 @@ All the following tools are grep-alike in their usage.
 - fgrep
 - ack
 - ag (Also known as the Silver Searcher)
-- rg : A replacement for grep or ag written in Rust
+- rg <https://github.com/BurntSushi/ripgrep>
 
 ## A pure Apples to Apples test
 

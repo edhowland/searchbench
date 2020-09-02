@@ -2,6 +2,7 @@
 # Setup
 source ./bench_log.sh
 
+
 find / > /work/dirs+files.lst
 
 # First test for the pattern and if not found, get out of Dodge
