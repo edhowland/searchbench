@@ -1,6 +1,8 @@
 FROM ubuntu:20.04
 RUN apt update -y && apt upgrade -y
 #RUN apt install -y git curl wget
+# Use GNU time, not the Bash builtin
+RUN apt install -y time
 RUN apt install -y wget
 RUN apt install -y locate
 RUN apt install -y mlocate

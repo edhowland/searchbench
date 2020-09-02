@@ -4,7 +4,9 @@ command varchar,
 pattern varchar,
 real float,
 user float,
-sys float);
+sys float,
+  status int,
+);
 CREATE TABLE averages (
 command varchar,
 real float,
