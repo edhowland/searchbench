@@ -1,6 +1,8 @@
 #!/bin/bash
 # The inner single benchmark runner. Will be called N times by bench.sh
 source ./bench_log.sh
+source ./bench_fns_log.sh
+
 
 TIMEFORMAT='%3R,%3U,%3S' # set a custom time format
 filename="$1"
@@ -29,7 +31,8 @@ bench() {
 for i in "$@"
 do
   log bench: running search for "$filename" for run number "$run_number"
-
+  find.first  "$i" "$filename"
+  log ":"
   run "$i" "$filename" "$run_number"
 done
 }

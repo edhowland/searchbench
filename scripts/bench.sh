@@ -8,12 +8,6 @@ test -z "$run_count" && run_count=3
 
 ./bench_init.sh "$filename" || exit $?
 log Will run benchmark searching for "$filename" "$run_count" times
-#log Starting warmup
-#for i in {1..3}
-#do
-#  ./bench_run.sh "$filename" "$i" >/dev/null 2>&1
-#done
-#log Finished run up
 
 
 log Will run "$run_count" times

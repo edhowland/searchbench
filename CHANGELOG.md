@@ -21,3 +21,10 @@ When running in logging mode, the exit status of each command is written to the 
 
 
 ### Update README.md with Logging command
+
+
+### Exit with 2 if no pattern can be found in initialization script
+
+If the benchmark is to be run against a file that is not found in the mounted 
+volumes, then the script exits early with exit status 2 and both logs and reports
+to stderr that it could not be found and is exitting
