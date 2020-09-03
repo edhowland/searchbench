@@ -1,4 +1,8 @@
 #!/bin/bash
-# docker.debug - Works like docker.run but with BENCH_LOG=1 for logging
-# Must pass filename and run count in that order
-docker run --rm --env BENCH_LOG=1  -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench edhowland/searchbench:$(cat docker.tag) $1 $2
+# docker.debug : Same as docker.run buts turns logging on for debugging
+# args: file pass_count
+source docker_fns.sh
+# move any old log file to a backup
+test -f bench.log && { mv bench.log $(bench.log.date) ;}
+docker.act --env BENCH_LOG=1 $(bench.img) $1 $2
+

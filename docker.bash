@@ -1,3 +1,5 @@
 #!/bin/bash
-# docker.bash - like docker.run but puts in new entrypoint : /bin/bash
-docker run --rm -it --entrypoint bash   -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench edhowland/searchbench:$(cat docker.tag)
+# Jumps into container with /bin/bash as entry point
+source docker_fns.sh
+docker.act -it --entrypoint /bin/bash $(bench.img)
+

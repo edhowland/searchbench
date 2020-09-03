@@ -1,3 +1,4 @@
 #!/bin/bash
-# Must pass filename and run count in that order
-docker run --rm  -v ${HOME}:${HOME} -v ${PWD}:/work --name=my-bench edhowland/searchbench:$(cat docker.tag) $1 $2
+# docker.run : Runs normal entry point for searchbench args: file pass_count
+source docker_fns.sh
+docker.act $(bench.img) $1 $2
