@@ -10,10 +10,10 @@ find.first() {
   then
 
     declare -A fnmap
-    fnmap[locate]=fn1.locate
-    fnmap[mlocate]=fn1.mlocate
+    fnmap[fn.locate]=fn1.locate
+    fnmap[fn.mlocate]=fn1.mlocate
     fnmap[fn.find]=fn1.find
-    fnmap[fd]=fn1.fd
+    fnmap[fn.fd]=fn1.fd
     fnmap[fn.fgrep]=fn1.fgrep
     fnmap[fn.ack]=fn1.ack
     fnmap[fn.ag]=fn1.ag
