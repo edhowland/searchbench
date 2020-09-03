@@ -39,7 +39,7 @@ fn1.fd() {
 }
 fn1.fgrep() {
   fgrep $1 /work/dirs+files.lst | head -1 | logp
-  log "{in fn1.fgrep \[$1\] returned  ${PIPESTATUS[0]}}"
+#  log "{in fn1.fgrep \[$1\] returned  ${PIPESTATUS[0]}}"
 }
 fn1.ack() {
   ack "$1" /work/dirs+files.lst | head -1  | logp
