@@ -3,6 +3,6 @@
 # args: file pass_count
 source docker_fns.sh
 # move any old log file to a backup
-test -f bench.log && { mv bench.log $(bench.log.date) ;}
+move_logs
 docker.act --entrypoint "./serialmark.sh"  --env BENCH_LOG=1 $(bench.img) $1 $2
 

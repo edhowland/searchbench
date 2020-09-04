@@ -2,7 +2,7 @@
 
 ## Current Docker tag
 
-edhowland/searchbench:0.2
+edhowland/searchbench:0.1
 
 This Docker container will benchmark 8 file/path search tools on a x86-64 Linux
 system for a given filename. It will return its results in a CSV formatted to stdout.
@@ -44,6 +44,12 @@ might be write-protected. They can be removed with 'rm -f dirs+files.lst bench.l
 The output written to  stdout is in comma separated value (CSV) format.
 of raw passes for each tool benchmarked. The timer used is the GNU time program.
 
+<https://www.gnu.org/software/time/>
+
+
+Note: The benchmark installs the GNU time program and uses that version, not the 'time'
+built in into Bash.
+
 ### Fields
 
 1. Pass number: The number of this pass run.
@@ -53,31 +59,21 @@ of raw passes for each tool benchmarked. The timer used is the GNU time program.
 5. The user time
 6. The sys time
 7. The exit status of the command
+
 ### Example
 
 This example searched for the file 'main.rs' and ran 2 passes of the benchmark.
 
 ```
-1,locate,main.rs,0.093,0.085,0.008,0
-1,mlocate,main.rs,0.088,0.084,0.004,0
-1,fn.find,main.rs,1.080,0.430,0.642,0
-1,fdfind,main.rs,0.003,0.004,0.000,0
-1,fn.fgrep,main\.rs,0.039,0.031,0.008,0
-1,fn.ack,main\.rs,0.431,0.407,0.024,0
-1,fn.ag,main\.rs,0.127,0.122,0.005,0
-1,fn.rg,main\.rs,0.019,0.018,0.000,0
-2,locate,main.rs,0.093,0.089,0.004,0
-2,mlocate,main.rs,0.089,0.089,0.000,0
-2,fn.find,main.rs,1.075,0.462,0.609,0
-2,fdfind,main.rs,0.003,0.004,0.000,0
-2,fn.fgrep,main\.rs,0.041,0.037,0.004,0
-2,fn.ack,main\.rs,0.432,0.408,0.024,0
-2,fn.ag,main\.rs,0.124,0.117,0.008,0
-2,fn.rg,main\.rs,0.020,0.012,0.008,0
+# Put results inside here
 ```
 
 
 ## The tools used
+
+Note: In cases where the tool is listed without a link, it was installed in
+the Docker image via the 'apt' tool. See the Dockerfile for exact package
+requirements.
 
 ### The searchers
 
@@ -116,15 +112,25 @@ running on a multi-core system, we can restrict the docker run command to just
 a single CPU.
 
 ```bash
-$ docker run --rm --cpuset-cpus 1 -v ${HOME}:${HOME} -v $PWD}:/work edhowland/searchbench main.rs 10
+$ docker run --rm --cpuset-cpus 0 -v ${HOME}:${HOME} -v $PWD}:/work edhowland/searchbench main.rs 10
 ```
 
-In the above case, the flag '--cpuset-cpus 1' is passed to the docker run invocation.
+In the above case, the flag '--cpuset-cpus 0' is passed to the docker run invocation.
 Then locate and fdfind should be running on similar footing.
 
 In my tests, this did not change the rankings.
 
+## Changing the order of the search passes
 
+When run normally, the scripts/bench.sh script runs the test in interleaved
+mode. For each pass, every tool is run once before proceeding to the next
+command. However, we can also run the same benchmark in serial mode. to do this,
+we pass the '--entrypoint "./serialmark.sh" to the docker run command.
+
+
+```bash
+$ docker run --rm --entrypoint "./serialmark.sh" -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 10
+```
 
 
 
@@ -155,3 +161,25 @@ flag to the docker run command.
 
 
 In the above case we do not pass any arguments to the command.
+
+
+## Analysis
+
+If you clone this repository from the GitHub link above, you will get several
+shell scripts to automate the above docker run commands
+
+In addition, you get some Sqlite3 .sql files to help you analyze the CSV output.
+
+There are 2 tables  created by the benchmark.schema file.
+
+- runs : Raw contents of the CSV input file
+- averages :  Computed averages of all times grouped by command across all passes.
+
+
+You can run the analyze.sh script with the CSV file name and the database file name
+to get a ranked result of the averages across all passes.
+
+```bash
+$ ./analyze.sh passes-10.csv passes-10.db
+...
+```

@@ -12,3 +12,7 @@ bench.img() {
 docker.act() {
   docker run --rm -v ${HOME}:${HOME} -v ${PWD}:/work $@ 
 }
+# move any old bench.log to timestamped backups
+move_logs() {
+test -f bench.log && { mv bench.log $(bench.log.date) ;}
+}

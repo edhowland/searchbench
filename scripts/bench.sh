@@ -8,6 +8,7 @@ test -z "$filename" && filename=README.md
 run_count="$2"
 test -z "$run_count" && run_count=3
 
+log Initializing search context
 ./bench_init.sh "$filename" || exit $?
 
 cd / # set directory context for all participants

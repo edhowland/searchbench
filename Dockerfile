@@ -13,6 +13,7 @@ RUN apt install -y ack-grep
 RUN wget https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
 RUN tar zxvf ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
 RUN cp ripgrep-12.1.1-x86_64-unknown-linux-musl/rg /usr/bin
+RUN mkdir -p /work
 # Run the initial updatedb
 RUN updatedb
 COPY scripts.tar /

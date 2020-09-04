@@ -8,11 +8,11 @@ test -z "$filename" && filename=README.md
 run_count="$2"
 test -z "$run_count" && run_count=3
 
-loge Initializing search context
+log Initializing search context
 ./bench_init.sh "$filename" || exit $?
 
 cd / # set directory context for all participants
-loge Will run benchmark searching for "$filename" "$run_count" times
+log Will run benchmark searching for "$filename" "$run_count" times
 
 # bench_act - Runs all arguments $run_count times each before advancing to next
 bench_act() {
@@ -22,7 +22,7 @@ do
   do
     run_number=$n
     bench $c
-    loge Running pass $n for $c
+    log Running pass $n for $c
   done
 done
 }
