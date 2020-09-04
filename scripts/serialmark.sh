@@ -14,7 +14,9 @@ loge Initializing search context
 cd / # set directory context for all participants
 loge Will run benchmark searching for "$filename" "$run_count" times
 
-for c in fn.locate fn.mlocate fn.find fn.fd fn.fgrep
+# bench_act - Runs all arguments $run_count times each before advancing to next
+bench_act() {
+for c in $@
 do
   for ((n=1; n <= "$run_count"; n++))
   do
@@ -23,17 +25,11 @@ do
     loge Running pass $n for $c
   done
 done
+}
 
-### Delete to the bottom from here
-exit 0
+bench_act fn.locate fn.mlocate fn.find fn.fd fn.fgrep
 
-for ((n=1; n <= "$run_count"; n++))
-do
-  log Starting run: "$n" "================"
-  bench_pass "$filename" "$n"
-  log Stopping run: "$n" "================"
-done
-# erase any non-zero exit status cruft accumulated above
-exit 0
-
+filename=$(echo "$filename" | sed -e 's/\./\\./')
+log Modified filename is "$filename"
+bench_act fn.ack fn.ag fn.rg
 
