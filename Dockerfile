@@ -19,6 +19,6 @@ RUN updatedb
 COPY scripts.tar /
 RUN tar xvf scripts.tar
 WORKDIR /scripts
-ENTRYPOINT ["./bench.sh"]
+ENTRYPOINT ["./ileavemark.sh"]
 
 

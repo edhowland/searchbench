@@ -14,6 +14,7 @@ find.first() {
     fnmap[fn.mlocate]=fn1.mlocate
     fnmap[fn.find]=fn1.find
     fnmap[fn.fd]=fn1.fd
+  fnmap[fn.fdfast]=fn1.fdfast
     fnmap[fn.fgrep]=fn1.fgrep
     fnmap[fn.ack]=fn1.ack
     fnmap[fn.ag]=fn1.ag
@@ -36,6 +37,9 @@ fn1.find() {
 }
 fn1.fd() {
   fd  --max-results 1  "$1"  | logp
+}
+fn1.fdfast() {
+  fd  --max-results 1  -g  "$1"  | logp
 }
 fn1.fgrep() {
   fgrep $1 /work/dirs+files.lst | head -1 | logp

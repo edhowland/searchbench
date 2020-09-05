@@ -2,7 +2,7 @@
 # docker_fns.sh : functions for docker run scripts
 # Get the search domain and scratchpad
 DOMAIN=${DOMAIN:-${HOME}}
-SCRATCH=${SCRATCH:-/tmp}
+SCRATCH=${SCRATCH:-${PWD}}
 bench.log.date() {
   echo -n bench.log.
   date +'%Y.%m.%d.%H.%M.%S'

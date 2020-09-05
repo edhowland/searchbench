@@ -29,7 +29,7 @@ containing any mounted network shares!**
 - $SCRATCH A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'
 
 Note: DOMAIN should contain at least one existant file that you are using for the search.
-And SCRATCH can be just /tmp
+And SCRATCH can be just any user writable location, perhaps $PWD.
 
 ```bash
 $ docker run --rm -v ${DOMAIN}:/domain -v /tmp:/work edhowland/searchbench main.rs 10
@@ -176,7 +176,7 @@ beginning with 'docker.'. They set DOMAIN and SCRATCH environment variables
 to the following default values. Note: override them by setting yourself first.
 
 - DOMAIN=${HOME}
-- SCRATCH=/tmp
+- SCRATCH=${PWD}
 
 ### Example run using main script:
 
