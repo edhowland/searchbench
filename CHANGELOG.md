@@ -46,3 +46,8 @@ Changed global search context to root : /
 ### Fixed ### fgrep not finding any results
 
 fgrep must take glob, not regex for filename pattern.
+
+### Fixed broken scripts/bench.sh not working past first pass
+
+Refactored scripts/serialmark.sh (which works OK) into scripts/ileavemark.sh
+Changed the entry point in Dockerfile
