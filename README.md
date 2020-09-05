@@ -19,18 +19,23 @@ The sources for this image can be found over at <https://github.com/edhowland/se
 ## Running the searchbench tool:
 
 There are 2 mountpoints needed for the container to run the benchmark.
+In the following examples below, the variables DOMAIN and SCRATCH are used instead
+of hard coded values.
 
 Note: **Make sure neither of these mount points are attached to a folder
 containing any mounted network shares!**
 
-- The top level directory wherein you want to search for the passed in file. Volume is read-only
-- A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'
+- $DOMAIN The top level directory wherein you want to search for the passed in file. Volume is read-only
+- $SCRATCH A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'
+
+Note: DOMAIN should contain at least one existant file that you are using for the search.
+And SCRATCH can be just /tmp
 
 ```bash
-$ docker run --rm -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 10
+$ docker run --rm -v ${DOMAIN}:/domain -v /tmp:/work edhowland/searchbench main.rs 10
 ```
 
-Again note: ** Make sure '-v ${HOME}:${HOME}' does not contain any mounted network shares**.
+Again note: ** Make sure '-v ${DOMAIN}' does not contain any mounted network shares**.
 
 Finally, we give the filename to search for, here: main.rs,  and the number of benchmark
 passes, in this case 10.
@@ -112,7 +117,7 @@ running on a multi-core system, we can restrict the docker run command to just
 a single CPU.
 
 ```bash
-$ docker run --rm --cpuset-cpus 0 -v ${HOME}:${HOME} -v $PWD}:/work edhowland/searchbench main.rs 10
+$ docker run --rm --cpuset-cpus 0 -v ${DOMAIN}:/domain -v $SCRATCH}:/work edhowland/searchbench main.rs 10
 ```
 
 In the above case, the flag '--cpuset-cpus 0' is passed to the docker run invocation.
@@ -129,7 +134,7 @@ we pass the '--entrypoint "./serialmark.sh" to the docker run command.
 
 
 ```bash
-$ docker run --rm --entrypoint "./serialmark.sh" -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 10
+$ docker run --rm --entrypoint "./serialmark.sh" -v ${DOMAIN}:/domain -v $PSCRATCH}:/work edhowland/searchbench main.rs 10
 ```
 
 
@@ -143,9 +148,9 @@ in the docker run command flags:
 ```bash
 
 ```bash
-$ docker run --rm -it --entrypoint bash  -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench
+$ docker run --rm -it --entrypoint bash  -v ${DOMAIN}:/domain -v ${SCRATCH}:/work edhowland/searchbench
 ```
-$ docker run --rm --env BENCH_LOG=1 -v ${HOME}:${HOME} -v /tmp:/work edhowland/searchbench main.rs 1
+$ docker run --rm --env BENCH_LOG=1 -v ${DOMAIN}:/domain -v ${SCRATCH}:/work edhowland/searchbench main.rs 1
 ```
 
 In the above case we are just running a single pass. The log file be written
@@ -166,7 +171,20 @@ In the above case we do not pass any arguments to the command.
 ## Analysis
 
 If you clone this repository from the GitHub link above, you will get several
-shell scripts to automate the above docker run commands
+shell scripts to automate the above docker run commands These are all files
+beginning with 'docker.'. They set DOMAIN and SCRATCH environment variables
+to the following default values. Note: override them by setting yourself first.
+
+- DOMAIN=${HOME}
+- SCRATCH=/tmp
+
+### Example run using main script:
+
+```bash
+$ docker.run main.rs 10 >passes-10.csv
+```
+
+### Using Sqlite3 to perform some analysis
 
 In addition, you get some Sqlite3 .sql files to help you analyze the CSV output.
 

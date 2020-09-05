@@ -25,6 +25,10 @@ fn.find() {
 fn.fd() {
   fn.search fd
 }
+fn.fdfast() {
+  fn.search 'fd -g'
+}
+
 # Run the searchers
 
 # bench() runs the benchmark run

@@ -1,5 +1,8 @@
 #!/bin/bash
 # docker_fns.sh : functions for docker run scripts
+# Get the search domain and scratchpad
+DOMAIN=${DOMAIN:-${HOME}}
+SCRATCH=${SCRATCH:-/tmp}
 bench.log.date() {
   echo -n bench.log.
   date +'%Y.%m.%d.%H.%M.%S'
@@ -10,7 +13,7 @@ bench.img() {
 }
 # Main entry point
 docker.act() {
-  docker run --rm -v ${HOME}:${HOME} -v ${PWD}:/work $@ 
+  docker run --rm -v ${DOMAIN}:/domain -v ${SCRATCH}:/work $@ 
 }
 # move any old bench.log to timestamped backups
 move_logs() {

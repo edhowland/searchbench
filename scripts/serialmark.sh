@@ -27,9 +27,12 @@ do
 done
 }
 
-bench_act fn.locate fn.mlocate fn.find fn.fd fn.fgrep
+bench_act fn.locate fn.mlocate fn.find fn.fd fn.fdfast fn.fgrep
 
-filename=$(echo "$filename" | sed -e 's/\./\\./')
+filename=$(echo "$filename" | sed -e 's/\./\\./g')
 log Modified filename is "$filename"
 bench_act fn.ack fn.ag fn.rg
 
+
+
+exit 0 # subsume any extraneous errors from above passes

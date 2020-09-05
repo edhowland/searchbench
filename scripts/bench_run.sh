@@ -15,11 +15,11 @@ test -z "$run_number" && run_number=1
 
 
 # Run all the searchers
-bench fn.locate fn.mlocate fn.find fn.fd fn.fgrep
+bench fn.locate fn.mlocate fn.find fn.fd fn.fdfast fn.fgrep
 
 # Now run the matchers
 
-filename=$(echo "$filename" | sed -e 's/\./\\./')
+filename=$(echo "$filename" | sed -e 's/\./\\./g')
 log Modified filename is "$filename"
 bench  fn.ack fn.ag fn.rg
 
