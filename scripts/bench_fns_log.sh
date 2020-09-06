@@ -36,10 +36,10 @@ fn1.find() {
   find / -name "$1" -print -quit | logp
 }
 fn1.fd() {
-  fd  --max-results 1  "$1"  | logp
+  fd  --max-results 1 -H -I "$1"  | logp
 }
 fn1.fdfast() {
-  fd  --max-results 1  -g  "$1"  | logp
+  fd  --max-results 1  -g  -H -I "$1"  | logp
 }
 fn1.fgrep() {
   fgrep $1 /work/dirs+files.lst | head -1 | logp

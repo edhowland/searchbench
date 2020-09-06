@@ -26,7 +26,7 @@ Note: **Make sure neither of these mount points are attached to a folder
 containing any mounted network shares!**
 
 - $DOMAIN The top level directory wherein you want to search for the passed in file. Volume is read-only
-- $SCRATCH A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'
+- $SCRATCH A scratchpad directory where searchbench will create some temporary files like log files and the'dirs+files.lst'. This mount point is read+write 
 
 Note: DOMAIN should contain at least one existant file that you are using for the search.
 And SCRATCH can be just any user writable location, perhaps $PWD.
@@ -70,7 +70,24 @@ built in into Bash.
 This example searched for the file 'main.rs' and ran 2 passes of the benchmark.
 
 ```
-# Put results inside here
+1,locate,main.rs,0.09,0.09,0.00,0
+1,mlocate,main.rs,0.09,0.08,0.00,0
+1,find,main.rs,1.08,0.44,0.63,0
+1,fd,main.rs,0.49,1.14,0.78,0
+1,fdfast,main.rs,0.49,1.09,0.82,0
+1,fgrep,main.rs,0.04,0.00,0.00,0
+2,locate,main.rs,0.09,0.09,0.00,0
+2,mlocate,main.rs,0.08,0.08,0.00,0
+2,find,main.rs,1.08,0.43,0.64,0
+2,fd,main.rs,0.49,1.15,0.78,0
+2,fdfast,main.rs,0.48,1.14,0.76,0
+2,fgrep,main.rs,0.01,0.01,0.00,0
+1,ack,main\.rs,0.52,0.40,0.02,0
+1,ag,main\.rs,0.15,0.11,0.00,0
+1,rg,main\.rs,0.02,0.02,0.00,0
+2,ack,main\.rs,0.42,0.41,0.01,0
+2,ag,main\.rs,0.12,0.11,0.00,0
+2,rg,main\.rs,0.02,0.01,0.00,0
 ```
 
 
@@ -101,7 +118,7 @@ find / > /work/dirs+files.lst
 ```
 
 Once the searchbench tool has been run, this file will be created in  whichever
-folder you mounted to /work  inside the container. E.g. $PWD.
+folder you mounted to /work  inside the container. E.g. ${PWD} or ${SCRATCH}.
 
 All the following tools are grep-alike in their usage.
 
@@ -109,6 +126,16 @@ All the following tools are grep-alike in their usage.
 - ack
 - ag (Also known as the Silver Searcher)
 - rg <https://github.com/BurntSushi/ripgrep>
+
+### Note on flags used for some tools
+
+In the case of the 'ag' tool, we pass the '--no-affinity' flag
+in order to prevent some error or warning.
+
+In the case of the fd tool, we pass the '-H -I' flags to simulate the behaviour
+of the find and locate or mlocate programs. Normally, 'fd' will skip hidden
+files and any pattens in '.gitignore' files. These flags suppress this
+behaviour to more closely match that of find, locate and mlocate.
 
 ## A pure Apples to Apples test
 

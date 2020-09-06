@@ -23,10 +23,10 @@ fn.find() {
   fn.search 'find / -name'
 }
 fn.fd() {
-  fn.search fd
+  fn.search 'fd -H -I'
 }
 fn.fdfast() {
-  fn.search 'fd -g'
+  fn.search 'fd -g -H -I'
 }
 
 # Run the searchers
