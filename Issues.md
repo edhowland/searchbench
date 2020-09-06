@@ -1,14 +1,5 @@
 # Issues
 
-## Logging not working
+## Make sure fd must match regular find and locate in search matches
 
-## Log the exit status of each command pass
-
-## Log the first result found of the search string for the first pass of each command
-
-
-## Update README.md with Logging command
-
-
-
-## Make new entrypoint for serial usage vs interleaved
+Currently, ignores .gitignore stuff, having an unfair advantage

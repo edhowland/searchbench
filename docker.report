@@ -1,0 +1,5 @@
+#!/bin/bash
+# docker.report : Reports on docker.xxx settings
+source docker_fns.sh
+echo DOMAIn = :${DOMAIN}: and will be searched for "$1" "$2" times
+echo SCRATCH = :${SCRATCH}: will be used to create "'dirs+files.lst'" and any "'bench.log'"
