@@ -1,0 +1,8 @@
+#!/bin/bash
+# docker.debug.serial : Same as docker.debug but sets entry point to serialmark.sh
+# args: file pass_count
+source docker_fns.sh
+# move any old log file to a backup
+move_logs
+docker.act --entrypoint "./serialmark.sh"  --env BENCH_LOG=1 $(bench.img) $1 $2
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+# docker.run.serial : Runs serialmark entry point for searchbench args: file pass_count
+source docker_fns.sh
+docker.act --entrypoint "./serialmark.sh" $(bench.img) $1 $2

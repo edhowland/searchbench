@@ -1,0 +1,5 @@
+#!/bin/bash
+# Jumps into container with /bin/bash as entry point excepts with only core
+source docker_fns.sh
+docker.act --cpuset-cpus 0 -it --entrypoint /bin/bash $(bench.img)
+

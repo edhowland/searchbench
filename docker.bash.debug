@@ -1,0 +1,8 @@
+#!/bin/bash
+# Jumps into container with /bin/bash as entry point
+source docker_fns.sh
+# move any old log file to a backup
+move_logs
+
+docker.act --env BENCH_LOG=1 -it --entrypoint /bin/bash $(bench.img)
+
